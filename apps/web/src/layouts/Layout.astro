@@ -1,95 +1,57 @@
 ---
-import { ClientRouter } from 'astro:transitions';
+import { ClientRouter } from "astro:transitions";
+import "../styles/global.css";
 
 interface Props {
   title: string;
   description?: string;
 }
 
-const { title, description = 'TMA Studio - Premium Telegram Mini App Showcase' } = Astro.props;
+const { title, description = "TMA Studio - Premium Telegram Mini App Showcase" } = Astro.props;
 ---
 
-<!doctype html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, viewport-fit=cover" />
     <meta name="description" content={description} />
-    <meta name="generator" content={Astro.generator} />
-    
-    <!-- Theme color for Telegram -->
-    <meta name="theme-color" content="#0a0a0f" />
-    
-    <!-- Telegram Web App Script -->
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    
     <title>{title}</title>
-    
-    <!-- Astro View Transitions -->
-    <ClientRouter />
-    
-    <!-- Global Styles -->
-    <link rel="stylesheet" href="/src/styles/global.css" />
+
+    <!-- Telegram Mini Apps официальная библиотека -->
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
   </head>
-  <body>
-    <slot />
-    
-    <!-- Initialize Telegram WebApp -->
+
+  <body class="min-h-[100dvh] bg-[var(--color-bg-primary)] text-[var(--color-text-primary)]">
+    <ClientRouter />
+
     <script is:inline>
-      // Initialize Telegram WebApp
-      if (window.Telegram && window.Telegram.WebApp) {
-        const tg = window.Telegram.WebApp;
-        
-        // Signal that the Mini App is ready
-        tg.ready();
-        
-        // Expand to full height
-        tg.expand();
-        
-        // Apply theme parameters to CSS variables
-        const themeParams = tg.themeParams;
-        if (themeParams) {
-          const root = document.documentElement;
-          
-          // Map Telegram theme params to CSS variables
-          if (themeParams.bg_color) root.style.setProperty('--tg-bg-color', themeParams.bg_color);
-          if (themeParams.text_color) root.style.setProperty('--tg-text-color', themeParams.text_color);
-          if (themeParams.hint_color) root.style.setProperty('--tg-hint-color', themeParams.hint_color);
-          if (themeParams.link_color) root.style.setProperty('--tg-link-color', themeParams.link_color);
-          if (themeParams.button_color) root.style.setProperty('--tg-button-color', themeParams.button_color);
-          if (themeParams.button_text_color) root.style.setProperty('--tg-button-text-color', themeParams.button_text_color);
-          if (themeParams.secondary_bg_color) root.style.setProperty('--tg-secondary-bg-color', themeParams.secondary_bg_color);
+      (() => {
+        const tg = window.Telegram?.WebApp;
+        if (!tg) {
+          console.warn("[TMA Studio] Telegram WebApp API not available. Running in browser mode.");
+          return;
         }
-        
-        // Listen for theme changes
-        tg.onEvent('themeChanged', function() {
-          const themeParams = tg.themeParams;
-          if (themeParams) {
-            const root = document.documentElement;
-            
-            if (themeParams.bg_color) root.style.setProperty('--tg-bg-color', themeParams.bg_color);
-            if (themeParams.text_color) root.style.setProperty('--tg-text-color', themeParams.text_color);
-            if (themeParams.hint_color) root.style.setProperty('--tg-hint-color', themeParams.hint_color);
-            if (themeParams.link_color) root.style.setProperty('--tg-link-color', themeParams.link_color);
-            if (themeParams.button_color) root.style.setProperty('--tg-button-color', themeParams.button_color);
-            if (themeParams.button_text_color) root.style.setProperty('--tg-button-text-color', themeParams.button_text_color);
-            if (themeParams.secondary_bg_color) root.style.setProperty('--tg-secondary-bg-color', themeParams.secondary_bg_color);
-          }
-        });
-        
-        // Listen for viewport changes
-        tg.onEvent('viewportChanged', function() {
-          // Viewport height is automatically handled by CSS viewport units (dvh, svh)
-          // This event can be used for additional custom logic if needed
-          console.log('[TMA Studio] Viewport changed:', {
-            height: tg.viewportHeight,
-            stableHeight: tg.viewportStableHeight,
-            isExpanded: tg.isExpanded
-          });
-        });
-      } else {
-        console.warn('[TMA Studio] Telegram WebApp API not available. Running in browser mode.');
-      }
+
+        tg.ready();
+        tg.expand();
+
+        const applyTheme = () => {
+          const p = tg.themeParams || {};
+          const root = document.documentElement;
+          if (p.bg_color) root.style.setProperty("--tg-bg-color", p.bg_color);
+          if (p.text_color) root.style.setProperty("--tg-text-color", p.text_color);
+          if (p.hint_color) root.style.setProperty("--tg-hint-color", p.hint_color);
+          if (p.link_color) root.style.setProperty("--tg-link-color", p.link_color);
+          if (p.button_color) root.style.setProperty("--tg-button-color", p.button_color);
+          if (p.button_text_color) root.style.setProperty("--tg-button-text-color", p.button_text_color);
+          if (p.secondary_bg_color) root.style.setProperty("--tg-secondary-bg-color", p.secondary_bg_color);
+        };
+
+        applyTheme();
+        tg.onEvent("themeChanged", applyTheme);
+      })();
     </script>
+
+    <slot />
   </body>
 </html>

@@ -1,196 +1,51 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import NavigationTile from '../components/ui/NavigationTile.astro';
-import ThemeSwitcher from '../components/islands/ThemeSwitcher.svelte';
+import Layout from "../layouts/Layout.astro";
+import NavigationTile from "../components/ui/NavigationTile.astro";
+import ThemeSwitcher from "../components/islands/ThemeSwitcher.svelte";
 ---
 
-<Layout title="TMA Studio - Premium Telegram Mini App Showcase">
-	<div class="home-container">
-		<!-- Hero Section -->
-		<section class="hero-section">
-			<div class="hero-content">
-				<h1 class="hero-title gradient-text">TMA Studio</h1>
-				<p class="hero-subtitle">
-					Premium Telegram Mini App Showcase
-				</p>
-				<p class="hero-description">
-					Experience best practices for building Mini Apps with modern web technologies.
-					Explore premium design, Telegram-native integration, and engineering excellence.
-				</p>
-				
-				<!-- Theme Switcher -->
-				<div class="theme-switcher-container">
-					<ThemeSwitcher client:load />
-				</div>
-			</div>
-		</section>
-		
-		<!-- Navigation Grid -->
-		<section class="navigation-section">
-			<h2 class="section-title">Explore Demos</h2>
-			
-			<div class="navigation-grid">
-				<NavigationTile
-					href="/buttons"
-					title="Buttons"
-					description="MainButton and BackButton demonstrations"
-					icon="🔘"
-					transitionName="tile-buttons"
-				/>
-				
-				<NavigationTile
-					href="/popups"
-					title="Popups"
-					description="Alerts, confirms, and custom popups"
-					icon="💬"
-					transitionName="tile-popups"
-				/>
-				
-				<NavigationTile
-					href="/theme"
-					title="Theme"
-					description="Theme switching and CSS variables"
-					icon="🎨"
-					transitionName="tile-theme"
-				/>
-				
-				<NavigationTile
-					href="/navigation"
-					title="Navigation"
-					description="View Transitions and shared elements"
-					icon="🧭"
-					transitionName="tile-navigation"
-				/>
-				
-				<NavigationTile
-					href="/integrations"
-					title="Integrations"
-					description="Authentication and preferences sync"
-					icon="🔗"
-					transitionName="tile-integrations"
-				/>
-			</div>
-		</section>
-	</div>
-</Layout>
+<Layout title="TMA Studio">
+  <main class="min-h-[100dvh] p-5 sm:p-6 md:p-8">
+    <section class="relative overflow-hidden rounded-[32px] border border-white/10 bg-[var(--gradient-primary)] px-6 py-14 sm:px-10 sm:py-16">
+      <div class="pointer-events-none absolute inset-0 opacity-70"
+        style="
+          background:
+            radial-gradient(900px 500px at 15% 35%, rgba(255,255,255,.16), transparent 60%),
+            radial-gradient(900px 500px at 85% 30%, rgba(0,0,0,.18), transparent 60%);
+        ">
+      </div>
 
-<style>
-	.home-container {
-		min-height: 100dvh;
-		padding: var(--space-lg, 24px);
-		display: flex;
-		flex-direction: column;
-		gap: var(--space-3xl, 64px);
-	}
-	
-	/* Hero Section */
-	.hero-section {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		text-align: center;
-		padding: var(--space-3xl, 64px) 0;
-		background: var(--gradient-primary, linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%));
-		background-clip: padding-box;
-		border-radius: var(--radius-xl, 32px);
-		position: relative;
-		overflow: hidden;
-	}
-	
-	.hero-section::before {
-		content: '';
-		position: absolute;
-		inset: 0;
-		background: 
-			radial-gradient(circle at 20% 50%, rgba(99, 102, 241, 0.3) 0%, transparent 50%),
-			radial-gradient(circle at 80% 50%, rgba(139, 92, 246, 0.3) 0%, transparent 50%);
-		pointer-events: none;
-	}
-	
-	.hero-content {
-		position: relative;
-		z-index: 1;
-		max-width: 800px;
-		padding: 0 var(--space-lg, 24px);
-	}
-	
-	.hero-title {
-		font-size: clamp(48px, 8vw, 72px);
-		font-weight: 800;
-		margin: 0 0 var(--space-md, 16px) 0;
-		line-height: 1.1;
-		letter-spacing: -0.02em;
-	}
-	
-	.hero-subtitle {
-		font-size: clamp(20px, 3vw, 28px);
-		font-weight: 600;
-		color: var(--color-text-primary, #ffffff);
-		margin: 0 0 var(--space-lg, 24px) 0;
-		opacity: 0.95;
-	}
-	
-	.hero-description {
-		font-size: clamp(16px, 2vw, 18px);
-		color: var(--color-text-primary, #ffffff);
-		margin: 0 0 var(--space-2xl, 48px) 0;
-		line-height: 1.6;
-		opacity: 0.85;
-		max-width: 600px;
-		margin-left: auto;
-		margin-right: auto;
-	}
-	
-	.theme-switcher-container {
-		display: flex;
-		justify-content: center;
-	}
-	
-	/* Navigation Section */
-	.navigation-section {
-		max-width: 1200px;
-		margin: 0 auto;
-		width: 100%;
-	}
-	
-	.section-title {
-		font-size: clamp(28px, 4vw, 36px);
-		font-weight: 700;
-		color: var(--color-text-primary, #ffffff);
-		margin: 0 0 var(--space-xl, 32px) 0;
-		text-align: center;
-	}
-	
-	.navigation-grid {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-		gap: var(--space-lg, 24px);
-	}
-	
-	@media (max-width: 768px) {
-		.home-container {
-			padding: var(--space-md, 16px);
-			gap: var(--space-2xl, 48px);
-		}
-		
-		.hero-section {
-			padding: var(--space-2xl, 48px) 0;
-			border-radius: var(--radius-lg, 24px);
-		}
-		
-		.navigation-grid {
-			grid-template-columns: 1fr;
-			gap: var(--space-md, 16px);
-		}
-	}
-	
-	@media (max-width: 640px) {
-		.hero-section {
-			padding: var(--space-xl, 32px) 0;
-		}
-		
-		.hero-description {
-			font-size: 15px;
-		}
-	}
-</style>
+      <div class="relative mx-auto max-w-3xl text-center">
+        <h1 class="text-[clamp(44px,7vw,72px)] font-extrabold tracking-[-0.02em] leading-[1.05]">
+          TMA Studio
+        </h1>
+
+        <p class="mt-4 text-[clamp(18px,2.6vw,28px)] font-semibold opacity-95">
+          Premium Telegram Mini App Showcase
+        </p>
+
+        <p class="mx-auto mt-6 max-w-xl text-[15px] sm:text-[16px] md:text-[17px] leading-relaxed opacity-85">
+          Experience best practices for building Mini Apps with modern web technologies. Explore premium design, Telegram-native integration, and engineering excellence.
+        </p>
+
+        <div class="mt-10 flex justify-center">
+          <ThemeSwitcher client:load />
+        </div>
+      </div>
+    </section>
+
+    <section class="mx-auto mt-12 max-w-6xl">
+      <h2 class="text-center text-3xl sm:text-4xl font-bold tracking-[-0.01em]">
+        Explore demos
+      </h2>
+
+      <div class="mt-8 grid gap-5 sm:gap-6 md:grid-cols-2 xl:grid-cols-3">
+        <NavigationTile href="/buttons" title="Buttons" description="MainButton and BackButton demos" icon="🟣" />
+        <NavigationTile href="/popups" title="Popups" description="Alerts, confirms, custom popups" icon="💬" />
+        <NavigationTile href="/theme" title="Theme" description="Theme switching and CSS variables" icon="🎨" />
+        <NavigationTile href="/navigation" title="Navigation" description="View Transitions and shared elements" icon="🧭" />
+        <NavigationTile href="/integrations" title="Integrations" description="Auth + preferences sync" icon="🔗" />
+      </div>
+    </section>
+  </main>
+</Layout>

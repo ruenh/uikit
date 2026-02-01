@@ -4,105 +4,26 @@ interface Props {
   title: string;
   description: string;
   icon: string;
-  transitionName: string;
 }
-
-const { href, title, description, icon, transitionName } = Astro.props;
+const { href, title, description, icon } = Astro.props;
 ---
 
-<a 
-  href={href} 
-  class="navigation-tile"
-  transition:name={transitionName}
+<a
+  href={href}
+  class="group flex items-center gap-4 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md px-5 py-4
+         shadow-[0_12px_40px_rgba(0,0,0,.45)]
+         transition hover:-translate-y-1 hover:shadow-[0_0_0_1px_rgba(99,102,241,.30),0_18px_60px_rgba(0,0,0,.55)]"
 >
-  <div class="tile-icon">{icon}</div>
-  <div class="tile-content">
-    <h3 class="tile-title">{title}</h3>
-    <p class="tile-description">{description}</p>
+  <div class="grid h-12 w-12 place-items-center rounded-xl bg-[var(--gradient-primary)] text-lg shadow-[var(--shadow-glow)]">
+    {icon}
   </div>
-  <div class="tile-arrow">→</div>
-</a>
 
-<style>
-  .navigation-tile {
-    display: flex;
-    align-items: center;
-    gap: var(--space-md, 16px);
-    padding: var(--space-lg, 24px);
-    background: var(--color-bg-secondary, #13131a);
-    border-radius: var(--radius-lg, 24px);
-    box-shadow: var(--shadow-md, 0 4px 16px rgba(0, 0, 0, 0.2));
-    text-decoration: none;
-    transition: all 0.3s ease;
-    border: 1px solid transparent;
-  }
-  
-  .navigation-tile:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-glow, 0 0 32px rgba(99, 102, 241, 0.4));
-    border-color: var(--color-accent-primary, #6366f1);
-  }
-  
-  .tile-icon {
-    font-size: 32px;
-    width: 56px;
-    height: 56px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: var(--gradient-primary, linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%));
-    border-radius: var(--radius-md, 16px);
-    flex-shrink: 0;
-  }
-  
-  .tile-content {
-    flex: 1;
-    min-width: 0;
-  }
-  
-  .tile-title {
-    font-size: 18px;
-    font-weight: 600;
-    color: var(--color-text-primary, #ffffff);
-    margin: 0 0 var(--space-xs, 4px) 0;
-  }
-  
-  .tile-description {
-    font-size: 14px;
-    color: var(--color-text-secondary, #a0a0b0);
-    margin: 0;
-    line-height: 1.4;
-  }
-  
-  .tile-arrow {
-    font-size: 24px;
-    color: var(--color-text-tertiary, #6b6b80);
-    transition: transform 0.3s ease;
-    flex-shrink: 0;
-  }
-  
-  .navigation-tile:hover .tile-arrow {
-    transform: translateX(4px);
-    color: var(--color-accent-primary, #6366f1);
-  }
-  
-  @media (max-width: 640px) {
-    .navigation-tile {
-      padding: var(--space-md, 16px);
-    }
-    
-    .tile-icon {
-      width: 48px;
-      height: 48px;
-      font-size: 24px;
-    }
-    
-    .tile-title {
-      font-size: 16px;
-    }
-    
-    .tile-description {
-      font-size: 13px;
-    }
-  }
-</style>
+  <div class="min-w-0 flex-1">
+    <div class="text-[16px] font-semibold leading-tight">{title}</div>
+    <div class="mt-1 text-[13px] leading-snug text-[var(--color-text-secondary)]">{description}</div>
+  </div>
+
+  <div class="text-[18px] text-[var(--color-text-tertiary)] transition group-hover:translate-x-1 group-hover:text-[var(--color-accent-primary)]">
+    →
+  </div>
+</a>
