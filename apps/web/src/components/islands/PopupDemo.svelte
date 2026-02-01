@@ -149,16 +149,16 @@
 
       <!-- Popup buttons -->
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-        <button onclick={showCustomPopup} class="btn-primary">
+        <button on:click={showCustomPopup} class="btn-primary">
           Show Custom Popup
         </button>
-        <button onclick={showSimplePopup} class="btn-secondary">
+        <button on:click={showSimplePopup} class="btn-secondary">
           Show Simple Popup
         </button>
-        <button onclick={showClosePopup} class="btn-secondary">
+        <button on:click={showClosePopup} class="btn-secondary">
           Show Close Popup
         </button>
-        <button onclick={showDestructiveConfirm} class="btn-destructive">
+        <button on:click={showDestructiveConfirm} class="btn-destructive">
           Show Destructive
         </button>
       </div>
@@ -214,7 +214,7 @@ tg.showPopup(
     </p>
 
     <div class="space-y-4">
-      <button onclick={showAlertDemo} class="btn-primary">
+      <button on:click={showAlertDemo} class="btn-primary">
         Show Alert
       </button>
 
@@ -252,7 +252,7 @@ tg.showAlert('This is an alert message.', () => {
     </p>
 
     <div class="space-y-4">
-      <button onclick={showConfirmDemo} class="btn-primary">
+      <button on:click={showConfirmDemo} class="btn-primary">
         Show Confirm
       </button>
 
@@ -315,7 +315,7 @@ tg.showConfirm('Do you want to proceed?', (confirmed) => {
 
   <!-- Reset Button -->
   <div class="text-center">
-    <button onclick={resetResults} class="btn-secondary">
+    <button on:click={resetResults} class="btn-secondary">
       Reset Results
     </button>
   </div>
