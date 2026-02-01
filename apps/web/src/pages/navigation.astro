@@ -3,37 +3,37 @@ import Layout from "../layouts/Layout.astro";
 import DemoCard from "../components/ui/DemoCard.astro";
 ---
 
-<Layout title="Navigation" description="View Transitions demo">
+<Layout title="Навигация" description="Демо View Transitions">
   <main class="min-h-[100dvh] px-4 pt-6 sm:px-6 md:px-8 pb-[calc(24px+env(safe-area-inset-bottom))]">
     <div class="mx-auto max-w-3xl">
       <a href="/" class="inline-flex items-center gap-2 text-sm text-[var(--color-text-secondary)] hover:text-white transition">
-        ← Back to Home
+        ← Назад на главную
       </a>
 
       <header class="mt-5">
         <h1 class="text-3xl sm:text-4xl font-extrabold tracking-[-0.02em]">
-          Navigation & Transitions
+          Навигация и переходы
         </h1>
         <p class="mt-3 text-[15px] sm:text-base leading-relaxed text-[var(--color-text-secondary)]">
-          This app uses Astro View Transitions for smooth page navigation.
-          Navigate between pages to see the animated transitions in action.
+          Это приложение использует Astro View Transitions для плавной навигации между страницами.
+          Переходите между страницами, чтобы увидеть анимированные переходы в действии.
         </p>
       </header>
 
       <section class="mt-8 space-y-6">
         <DemoCard title="View Transitions">
-          <p>Astro View Transitions provide smooth, animated page transitions without full page reloads.</p>
-          <p class="mt-2">Try navigating to different pages using the navigation tiles on the home page to see the transitions.</p>
+          <p>Astro View Transitions обеспечивают плавные анимированные переходы между страницами без полной перезагрузки.</p>
+          <p class="mt-2">Попробуйте перейти на разные страницы, используя плитки навигации на главной странице, чтобы увидеть переходы.</p>
         </DemoCard>
 
-        <DemoCard title="Shared Elements">
-          <p>Elements with matching <code class="px-1 py-0.5 rounded bg-black/30">transition:name</code> attributes animate smoothly between pages.</p>
-          <p class="mt-2">This creates a native app-like experience with minimal code.</p>
+        <DemoCard title="Общие элементы">
+          <p>Элементы с совпадающими атрибутами <code class="px-1 py-0.5 rounded bg-black/30">transition:name</code> плавно анимируются между страницами.</p>
+          <p class="mt-2">Это создаёт опыт, похожий на нативное приложение, с минимальным количеством кода.</p>
         </DemoCard>
 
-        <DemoCard title="Browser Navigation">
-          <p>Back/forward buttons work seamlessly with View Transitions.</p>
-          <p class="mt-2">The browser history is preserved, and transitions play in reverse when going back.</p>
+        <DemoCard title="Навигация браузера">
+          <p>Кнопки назад/вперёд работают бесшовно с View Transitions.</p>
+          <p class="mt-2">История браузера сохраняется, и переходы воспроизводятся в обратном порядке при возврате назад.</p>
         </DemoCard>
       </section>
     </div>

@@ -3,27 +3,27 @@ import Layout from "../layouts/Layout.astro";
 import ThemeSwitcher from "../components/islands/ThemeSwitcher.svelte";
 ---
 
-<Layout title="Theme" description="Theme system demo">
+<Layout title="Темы" description="Демо системы тем">
   <main class="min-h-[100dvh] px-4 pt-6 sm:px-6 md:px-8 pb-[calc(24px+env(safe-area-inset-bottom))]">
     <div class="mx-auto max-w-4xl">
       <a href="/" class="inline-flex items-center gap-2 text-sm text-[var(--color-text-secondary)] hover:text-white transition">
-        ← Back to Home
+        ← Назад на главную
       </a>
 
       <header class="mt-5">
         <h1 class="text-3xl sm:text-4xl font-extrabold tracking-[-0.02em]">
-          Theme System
+          Система тем
         </h1>
         <p class="mt-3 text-[15px] sm:text-base leading-relaxed text-[var(--color-text-secondary)]">
-          Explore three theme modes: Native (Telegram colors), Premium (custom design), and Mixed (blend of both).
-          Your preference is saved to the database and persists across sessions.
+          Изучите три режима тем: Native (цвета Telegram), Premium (кастомный дизайн) и Mixed (смесь обоих).
+          Ваши настройки сохраняются в базу данных и сохраняются между сессиями.
         </p>
       </header>
 
       <section class="mt-8 glass rounded-2xl p-5 sm:p-6 shadow-[var(--shadow-md)]">
-        <h2 class="text-xl font-semibold">Theme Switcher</h2>
+        <h2 class="text-xl font-semibold">Переключатель тем</h2>
         <p class="mt-2 text-sm leading-relaxed text-[var(--color-text-secondary)]">
-          Select a theme mode. Your preference will be saved automatically.
+          Выберите режим темы. Ваши настройки будут сохранены автоматически.
         </p>
         <div class="mt-4 flex justify-center">
           <ThemeSwitcher client:load />
@@ -31,30 +31,30 @@ import ThemeSwitcher from "../components/islands/ThemeSwitcher.svelte";
       </section>
 
       <section class="mt-6 glass rounded-2xl p-5 sm:p-6 shadow-[var(--shadow-md)]">
-        <h2 class="text-xl font-semibold">Theme Reactivity Demo</h2>
+        <h2 class="text-xl font-semibold">Демо реактивности тем</h2>
         <p class="mt-2 text-sm leading-relaxed text-[var(--color-text-secondary)]">
-          These elements automatically update when you change the theme mode.
+          Эти элементы автоматически обновляются при смене режима темы.
         </p>
         <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div class="rounded-xl border border-white/10 bg-black/20 p-4">
-            <div class="text-sm font-semibold mb-2">Background</div>
+            <div class="text-sm font-semibold mb-2">Фон</div>
             <div class="h-16 rounded-lg bg-[var(--color-bg-primary)] border border-white/10"></div>
             <code class="mt-2 block text-xs text-[var(--color-text-secondary)]">var(--color-bg-primary)</code>
           </div>
           <div class="rounded-xl border border-white/10 bg-black/20 p-4">
-            <div class="text-sm font-semibold mb-2">Accent</div>
+            <div class="text-sm font-semibold mb-2">Акцент</div>
             <div class="h-16 rounded-lg bg-[var(--color-accent-primary)] border border-white/10"></div>
             <code class="mt-2 block text-xs text-[var(--color-text-secondary)]">var(--color-accent-primary)</code>
           </div>
           <div class="rounded-xl border border-white/10 bg-black/20 p-4">
-            <div class="text-sm font-semibold mb-2">Gradient</div>
+            <div class="text-sm font-semibold mb-2">Градиент</div>
             <div class="h-16 rounded-lg bg-[var(--gradient-primary)] border border-white/10"></div>
             <code class="mt-2 block text-xs text-[var(--color-text-secondary)]">var(--gradient-primary)</code>
           </div>
           <div class="rounded-xl border border-white/10 bg-black/20 p-4">
-            <div class="text-sm font-semibold mb-2">Text</div>
+            <div class="text-sm font-semibold mb-2">Текст</div>
             <div class="h-16 rounded-lg bg-black/30 border border-white/10 flex items-center justify-center text-[var(--color-text-primary)] font-semibold">
-              Sample Text
+              Пример текста
             </div>
             <code class="mt-2 block text-xs text-[var(--color-text-secondary)]">var(--color-text-primary)</code>
           </div>
