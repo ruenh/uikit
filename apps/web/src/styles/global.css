@@ -3,54 +3,72 @@
 /* ============================================================================
    TMA Studio - Premium Theme System
    Tailwind CSS v4 (CSS-first configuration)
+   Font Specimen Manager Design
    ============================================================================ */
 
 /* ============================================================================
-   Premium Theme (Default)
+   New Design Tokens (Font Specimen Manager style)
    ============================================================================ */
 :root {
-  /* Background Colors */
-  --color-bg-primary: #0a0a0f;
-  --color-bg-secondary: #13131a;
-  --color-bg-tertiary: #1a1a24;
+  /* Palette */
+  --bg-main: #1E1E1E;
+  --bg-panel: #2C2C2C;
+  --bg-input: #000000;
+  --bg-hover: #383838;
   
-  /* Text Colors */
-  --color-text-primary: #ffffff;
-  --color-text-secondary: #a0a0b0;
-  --color-text-tertiary: #6b6b80;
+  --border: #444444;
+  --border-subtle: #333333;
   
-  /* Accent Colors */
-  --color-accent-primary: #6366f1;
-  --color-accent-secondary: #8b5cf6;
-  --color-accent-hover: #7c3aed;
+  --accent-red: #F24E1E;
+  --accent-orange: #FF7262;
+  --accent-purple: #A259FF;
+  --accent-blue: #1ABCFE;
+  --accent-green: #0ACF83;
   
-  /* Gradients */
-  --gradient-primary: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
-  --gradient-secondary: linear-gradient(135deg, #3b82f6 0%, #6366f1 100%);
-  --gradient-accent: linear-gradient(135deg, #ec4899 0%, #8b5cf6 100%);
+  --text-main: #FFFFFF;
+  --text-muted: #B3B3B3;
+  --text-dim: #757575;
   
-  /* Shadows - Multi-layer for depth */
-  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.15);
-  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.2), 0 2px 8px rgba(0, 0, 0, 0.1);
-  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.25), 0 4px 16px rgba(0, 0, 0, 0.15);
-  --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.2);
+  /* Map to existing system tokens (so whole project updates) */
+  --color-bg-primary: var(--bg-main);
+  --color-bg-secondary: var(--bg-panel);
+  --color-bg-tertiary: #222222;
   
-  /* Glow Effects */
-  --shadow-glow: 0 0 32px rgba(99, 102, 241, 0.4);
-  --shadow-glow-hover: 0 0 48px rgba(99, 102, 241, 0.6);
-  --shadow-glow-accent: 0 0 32px rgba(139, 92, 246, 0.4);
+  --color-text-primary: var(--text-main);
+  --color-text-secondary: var(--text-muted);
+  --color-text-tertiary: var(--text-dim);
   
-  /* Border Radius - Large for modern aesthetic */
-  --radius-sm: 8px;
-  --radius-md: 16px;
-  --radius-lg: 24px;
-  --radius-xl: 32px;
+  --color-accent-primary: var(--accent-blue);
+  --color-accent-secondary: var(--accent-purple);
+  --color-accent-hover: #4ad3ff;
+  
+  /* Gradients (subtle, design is more flat) */
+  --gradient-primary: linear-gradient(135deg, var(--accent-purple) 0%, var(--accent-blue) 100%);
+  --gradient-secondary: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-green) 100%);
+  --gradient-accent: linear-gradient(135deg, var(--accent-red) 0%, var(--accent-orange) 100%);
+  
+  /* Radii (smaller, tighter) */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 12px;
   --radius-full: 9999px;
   
-  /* Glass Morphism */
-  --glass-bg: rgba(255, 255, 255, 0.05);
-  --glass-border: rgba(255, 255, 255, 0.1);
-  --glass-blur: 12px;
+  /* Shadows (tighter) */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.35);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.35);
+  --shadow-lg: 0 14px 40px rgba(0, 0, 0, 0.45);
+  --shadow-xl: 0 20px 60px rgba(0, 0, 0, 0.5);
+  
+  /* Glow Effects (subtle) */
+  --shadow-glow: 0 0 24px rgba(26, 188, 254, 0.3);
+  --shadow-glow-hover: 0 0 32px rgba(26, 188, 254, 0.4);
+  --shadow-glow-accent: 0 0 24px rgba(162, 89, 255, 0.3);
+  
+  /* Glass panel is now solid panel */
+  --glass-bg: rgba(44, 44, 44, 0.95);
+  --glass-border: rgba(68, 68, 68, 1);
+  --glass-blur: 0px;
   
   /* Spacing Scale (systematic) */
   --space-xs: 4px;
@@ -62,18 +80,18 @@
   --space-3xl: 64px;
   
   /* Telegram Theme Params (populated dynamically by tg.ts) */
-  --tg-bg-color: #0a0a0f;
-  --tg-text-color: #ffffff;
-  --tg-hint-color: #a0a0b0;
-  --tg-link-color: #6366f1;
-  --tg-button-color: #6366f1;
+  --tg-bg-color: var(--bg-main);
+  --tg-text-color: var(--text-main);
+  --tg-hint-color: var(--text-muted);
+  --tg-link-color: var(--accent-blue);
+  --tg-button-color: var(--accent-blue);
   --tg-button-text-color: #ffffff;
-  --tg-secondary-bg-color: #13131a;
-  --tg-header-bg-color: #0a0a0f;
-  --tg-section-bg-color: #13131a;
-  --tg-section-header-text-color: #a0a0b0;
-  --tg-subtitle-text-color: #6b6b80;
-  --tg-destructive-text-color: #ef4444;
+  --tg-secondary-bg-color: var(--bg-panel);
+  --tg-header-bg-color: var(--bg-main);
+  --tg-section-bg-color: var(--bg-panel);
+  --tg-section-header-text-color: var(--text-muted);
+  --tg-subtitle-text-color: var(--text-dim);
+  --tg-destructive-text-color: var(--accent-red);
 }
 
 /* ============================================================================
@@ -150,10 +168,98 @@
 body {
   background-color: var(--color-bg-primary);
   color: var(--color-text-primary);
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* Selection */
+::selection {
+  background: rgba(162, 89, 255, 0.35);
+  color: #fff;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #444;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Range Input */
+input[type="range"] {
+  -webkit-appearance: none;
+  width: 100%;
+  background: transparent;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 12px;
+  width: 12px;
+  border-radius: 9999px;
+  background: #fff;
+  border: 1px solid #000;
+  cursor: pointer;
+  margin-top: -5px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 2px;
+  cursor: pointer;
+  background: var(--border);
+  border-radius: 9999px;
+}
+
+input[type="range"]:focus {
+  outline: none;
+}
+
+/* Custom Checkbox */
+.custom-checkbox {
+  appearance: none;
+  background-color: transparent;
+  margin: 0;
+  width: 14px;
+  height: 14px;
+  border: 1px solid var(--text-dim);
+  border-radius: 3px;
+  display: grid;
+  place-content: center;
+}
+
+.custom-checkbox::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  transform: scale(0);
+  transition: 120ms transform ease-in-out;
+  box-shadow: inset 1em 1em var(--accent-blue);
+  transform-origin: center;
+  clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+}
+
+.custom-checkbox:checked {
+  border-color: var(--accent-blue);
+}
+
+.custom-checkbox:checked::before {
+  transform: scale(1);
 }
 
 /* ============================================================================
