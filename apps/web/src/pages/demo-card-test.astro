@@ -1,0 +1,168 @@
+---
+/**
+ * DemoCard Test Page
+ * 
+ * This page demonstrates the DemoCard component with various use cases.
+ * Used for verification during development.
+ */
+import Layout from '../layouts/Layout.astro';
+import DemoCard from '../components/ui/DemoCard.astro';
+---
+
+<Layout title="DemoCard Test - TMA Studio">
+  <div class="container">
+    <header class="page-header">
+      <h1 class="page-title">DemoCard Component</h1>
+      <p class="page-description">
+        Premium card component with glass morphism, large border radius, soft shadows, and hover glow effects.
+      </p>
+    </header>
+
+    <div class="demo-grid">
+      <!-- Basic card with title -->
+      <DemoCard title="Basic Card">
+        <p>This is a basic DemoCard with a title. It features glass morphism effects, large border radius (24px), and soft multi-layer shadows.</p>
+      </DemoCard>
+
+      <!-- Card without title -->
+      <DemoCard>
+        <h4 style="margin: 0 0 0.5rem 0; color: var(--color-text-primary);">Custom Content</h4>
+        <p>This card has no title prop, allowing for fully custom content. The glass morphism effect creates depth with subtle backdrop blur.</p>
+      </DemoCard>
+
+      <!-- Card with custom class -->
+      <DemoCard title="Hover Me!" class="highlight-card">
+        <p>Hover over this card to see the glow effect in action. The shadow transitions smoothly to create a premium feel.</p>
+      </DemoCard>
+
+      <!-- Card with list content -->
+      <DemoCard title="Features">
+        <ul style="margin: 0; padding-left: 1.25rem; color: var(--color-text-secondary);">
+          <li>Glass morphism with backdrop blur</li>
+          <li>Large border radius (16px minimum)</li>
+          <li>Soft multi-layer shadows</li>
+          <li>Hover glow animation</li>
+          <li>Responsive design</li>
+        </ul>
+      </DemoCard>
+
+      <!-- Card with code snippet -->
+      <DemoCard title="Usage Example">
+        <pre style="background: rgba(0,0,0,0.3); padding: 1rem; border-radius: 8px; overflow-x: auto; font-size: 0.875rem;"><code>&lt;DemoCard title="My Card"&gt;
+  &lt;p&gt;Card content here&lt;/p&gt;
+&lt;/DemoCard&gt;</code></pre>
+      </DemoCard>
+
+      <!-- Full-width card -->
+      <DemoCard title="Full Width Card" class="full-width">
+        <p>This card spans the full width of the grid. Perfect for showcasing larger content or important information.</p>
+        <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+          <div style="flex: 1; padding: 1rem; background: rgba(99, 102, 241, 0.1); border-radius: 8px;">
+            <strong style="color: var(--color-accent-primary);">Feature 1</strong>
+            <p style="margin: 0.5rem 0 0 0; font-size: 0.875rem;">Glass morphism effect</p>
+          </div>
+          <div style="flex: 1; padding: 1rem; background: rgba(139, 92, 246, 0.1); border-radius: 8px;">
+            <strong style="color: var(--color-accent-secondary);">Feature 2</strong>
+            <p style="margin: 0.5rem 0 0 0; font-size: 0.875rem;">Hover glow animation</p>
+          </div>
+        </div>
+      </DemoCard>
+    </div>
+
+    <footer class="page-footer">
+      <a href="/" class="back-link">
+        ← Back to Home
+      </a>
+    </footer>
+  </div>
+</Layout>
+
+<style>
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+    min-height: 100vh;
+  }
+
+  .page-header {
+    margin-bottom: 3rem;
+    text-align: center;
+  }
+
+  .page-title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 1rem;
+  }
+
+  .page-description {
+    font-size: 1.125rem;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .demo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+  }
+
+  .demo-grid :global(.full-width) {
+    grid-column: 1 / -1;
+  }
+
+  .demo-grid :global(.highlight-card) {
+    border-color: rgba(99, 102, 241, 0.2);
+  }
+
+  .page-footer {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--glass-border);
+    text-align: center;
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--color-accent-primary);
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--color-accent-secondary);
+    transform: translateX(-4px);
+  }
+
+  @media (max-width: 768px) {
+    .demo-grid {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .container {
+      padding: 1rem 0.75rem;
+    }
+
+    .page-title {
+      font-size: 2rem;
+    }
+
+    .page-description {
+      font-size: 1rem;
+    }
+  }
+</style>

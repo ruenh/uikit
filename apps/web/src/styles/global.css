@@ -1,0 +1,209 @@
+@import "tailwindcss";
+
+/* ============================================================================
+   TMA Studio - Premium Theme System
+   Tailwind CSS v4 (CSS-first configuration)
+   ============================================================================ */
+
+/* ============================================================================
+   Premium Theme (Default)
+   ============================================================================ */
+:root {
+  /* Background Colors */
+  --color-bg-primary: #0a0a0f;
+  --color-bg-secondary: #13131a;
+  --color-bg-tertiary: #1a1a24;
+  
+  /* Text Colors */
+  --color-text-primary: #ffffff;
+  --color-text-secondary: #a0a0b0;
+  --color-text-tertiary: #6b6b80;
+  
+  /* Accent Colors */
+  --color-accent-primary: #6366f1;
+  --color-accent-secondary: #8b5cf6;
+  --color-accent-hover: #7c3aed;
+  
+  /* Gradients */
+  --gradient-primary: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  --gradient-secondary: linear-gradient(135deg, #3b82f6 0%, #6366f1 100%);
+  --gradient-accent: linear-gradient(135deg, #ec4899 0%, #8b5cf6 100%);
+  
+  /* Shadows - Multi-layer for depth */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.15);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.2), 0 2px 8px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.25), 0 4px 16px rgba(0, 0, 0, 0.15);
+  --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.2);
+  
+  /* Glow Effects */
+  --shadow-glow: 0 0 32px rgba(99, 102, 241, 0.4);
+  --shadow-glow-hover: 0 0 48px rgba(99, 102, 241, 0.6);
+  --shadow-glow-accent: 0 0 32px rgba(139, 92, 246, 0.4);
+  
+  /* Border Radius - Large for modern aesthetic */
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-xl: 32px;
+  --radius-full: 9999px;
+  
+  /* Glass Morphism */
+  --glass-bg: rgba(255, 255, 255, 0.05);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-blur: 12px;
+  
+  /* Spacing Scale (systematic) */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-2xl: 48px;
+  --space-3xl: 64px;
+  
+  /* Telegram Theme Params (populated dynamically by tg.ts) */
+  --tg-bg-color: #0a0a0f;
+  --tg-text-color: #ffffff;
+  --tg-hint-color: #a0a0b0;
+  --tg-link-color: #6366f1;
+  --tg-button-color: #6366f1;
+  --tg-button-text-color: #ffffff;
+  --tg-secondary-bg-color: #13131a;
+  --tg-header-bg-color: #0a0a0f;
+  --tg-section-bg-color: #13131a;
+  --tg-section-header-text-color: #a0a0b0;
+  --tg-subtitle-text-color: #6b6b80;
+  --tg-destructive-text-color: #ef4444;
+}
+
+/* ============================================================================
+   Native Theme - Use Telegram Colors
+   Requirements: 6.2 (Native mode uses Telegram themeParams)
+   ============================================================================ */
+[data-theme="native"] {
+  /* Override with Telegram theme params */
+  --color-bg-primary: var(--tg-bg-color, #ffffff);
+  --color-bg-secondary: var(--tg-secondary-bg-color, #f5f5f5);
+  --color-bg-tertiary: var(--tg-section-bg-color, #ffffff);
+  
+  --color-text-primary: var(--tg-text-color, #000000);
+  --color-text-secondary: var(--tg-hint-color, #6b6b80);
+  --color-text-tertiary: var(--tg-subtitle-text-color, #a0a0b0);
+  
+  --color-accent-primary: var(--tg-button-color, #3390ec);
+  --color-accent-secondary: var(--tg-link-color, #3390ec);
+  --color-accent-hover: var(--tg-button-color, #3390ec);
+  
+  /* Simplified gradients for native theme */
+  --gradient-primary: linear-gradient(135deg, var(--tg-button-color, #3390ec) 0%, var(--tg-link-color, #3390ec) 100%);
+  
+  /* Softer shadows for native theme */
+  --shadow-md: 0 2px 8px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 4px 16px rgba(0, 0, 0, 0.15);
+  
+  /* Minimal glow for native theme */
+  --shadow-glow: 0 0 16px rgba(51, 144, 236, 0.2);
+  --shadow-glow-hover: 0 0 24px rgba(51, 144, 236, 0.3);
+}
+
+/* ============================================================================
+   Mixed Theme - Blend Telegram + Premium
+   Requirements: 6.4 (Mixed mode blends Telegram with premium elements)
+   ============================================================================ */
+[data-theme="mixed"] {
+  /* Use Telegram colors for backgrounds */
+  --color-bg-primary: var(--tg-bg-color, #0a0a0f);
+  --color-bg-secondary: var(--tg-secondary-bg-color, #13131a);
+  
+  /* Use Telegram colors for text */
+  --color-text-primary: var(--tg-text-color, #ffffff);
+  --color-text-secondary: var(--tg-hint-color, #a0a0b0);
+  
+  /* Keep premium accent colors and gradients */
+  --color-accent-primary: #6366f1;
+  --color-accent-secondary: #8b5cf6;
+  --gradient-primary: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  
+  /* Keep premium shadows and glow effects */
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.2), 0 2px 8px rgba(0, 0, 0, 0.1);
+  --shadow-glow: 0 0 32px rgba(99, 102, 241, 0.4);
+}
+
+/* ============================================================================
+   Reduced Motion Support
+   Requirements: 1.8, 6.3 (Respect prefers-reduced-motion)
+   ============================================================================ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ============================================================================
+   Base Styles
+   ============================================================================ */
+body {
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ============================================================================
+   Utility Classes for Premium Design
+   Requirements: 1.1-1.8 (Premium visual design elements)
+   ============================================================================ */
+
+/* Glass Morphism Effect */
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+}
+
+/* Glow Effect on Hover */
+.glow-hover {
+  transition: box-shadow 0.3s ease;
+}
+
+.glow-hover:hover {
+  box-shadow: var(--shadow-glow-hover);
+}
+
+/* Gradient Text */
+.gradient-text {
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Premium Card */
+.card-premium {
+  background: var(--color-bg-secondary);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  padding: var(--space-lg);
+}
+
+/* Interactive Element with Glow */
+.interactive-glow {
+  transition: box-shadow 0.3s ease, transform 0.2s ease;
+}
+
+.interactive-glow:hover {
+  box-shadow: var(--shadow-glow);
+  transform: translateY(-2px);
+}
+
+.interactive-glow:active {
+  transform: translateY(0);
+}

@@ -1,0 +1,27 @@
+# TMA Studio Telegram Bot Service
+# Copy to: /etc/systemd/system/tma-studio-bot.service
+
+[Unit]
+Description=TMA Studio Telegram Bot
+After=network.target
+
+[Service]
+Type=simple
+User=www-data
+Group=www-data
+WorkingDirectory=/opt/tma-studio/apps/bot
+Environment="PATH=/opt/tma-studio/venv/bin"
+EnvironmentFile=/opt/tma-studio/apps/bot/.env
+
+ExecStart=/opt/tma-studio/venv/bin/python bot.py
+
+# Restart policy
+Restart=always
+RestartSec=10
+
+# Logging
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

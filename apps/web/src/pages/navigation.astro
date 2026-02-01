@@ -1,0 +1,666 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Navigation & View Transitions - TMA Studio">
+  <div class="container">
+    <header class="page-header">
+      <h1 class="page-title" transition:name="nav-title">Navigation & View Transitions</h1>
+      <p class="page-description">
+        Experience smooth, animated transitions between pages using Astro's View Transitions API.
+        This page demonstrates shared element transitions, persistent elements, and the power of modern web navigation.
+      </p>
+    </header>
+
+    <!-- Shared Element Transitions Demo -->
+    <section class="demo-section">
+      <h2 class="section-title">Shared Element Transitions</h2>
+      <p class="section-description">
+        Elements with matching <code>transition:name</code> attributes morph smoothly between pages.
+        Click the tiles below to see shared element transitions in action.
+      </p>
+      
+      <div class="transition-grid">
+        <a href="/" class="transition-card" transition:name="card-home">
+          <div class="card-icon">🏠</div>
+          <h3 class="card-title">Home Page</h3>
+          <p class="card-text">Navigate to home and watch this card morph into the navigation tile</p>
+        </a>
+        
+        <a href="/buttons" class="transition-card" transition:name="card-buttons">
+          <div class="card-icon">🔘</div>
+          <h3 class="card-title">Buttons Demo</h3>
+          <p class="card-text">See MainButton and BackButton demonstrations</p>
+        </a>
+        
+        <a href="/popups" class="transition-card" transition:name="card-popups">
+          <div class="card-icon">💬</div>
+          <h3 class="card-title">Popups Demo</h3>
+          <p class="card-text">Explore alerts, confirms, and custom popups</p>
+        </a>
+        
+        <a href="/theme" class="transition-card" transition:name="card-theme">
+          <div class="card-icon">🎨</div>
+          <h3 class="card-title">Theme System</h3>
+          <p class="card-text">Switch between Native, Premium, and Mixed themes</p>
+        </a>
+      </div>
+    </section>
+
+    <!-- Persistent Elements Demo -->
+    <section class="demo-section">
+      <h2 class="section-title">Persistent Elements</h2>
+      <p class="section-description">
+        Elements with <code>transition:persist</code> maintain their state across page navigations.
+        The video below will continue playing even when you navigate to other pages and return.
+      </p>
+      
+      <div class="persist-demo">
+        <div class="video-container">
+          <video 
+            controls 
+            muted 
+            autoplay 
+            loop
+            transition:name="demo-video"
+            transition:persist
+            class="demo-video"
+          >
+            <source 
+              src="https://ia804502.us.archive.org/33/items/GoldenGa1939_3/GoldenGa1939_3_512kb.mp4" 
+              type="video/mp4" 
+            />
+            Your browser does not support the video tag.
+          </video>
+          <p class="video-caption">
+            This video persists across page navigations using <code>transition:persist</code>
+          </p>
+        </div>
+        
+        <div class="persist-info">
+          <h3 class="info-title">How It Works</h3>
+          <ul class="info-list">
+            <li>
+              <strong>State Preservation:</strong> The video element maintains its playback position and state
+            </li>
+            <li>
+              <strong>No Interruption:</strong> Navigation doesn't restart the video or reset its state
+            </li>
+            <li>
+              <strong>Seamless Experience:</strong> Users can navigate freely while media continues playing
+            </li>
+            <li>
+              <strong>Works with Islands:</strong> Svelte/React components can also persist their state
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- View Transitions Explanation -->
+    <section class="demo-section">
+      <h2 class="section-title">View Transitions Features</h2>
+      <p class="section-description">
+        Astro's View Transitions provide a powerful way to create smooth, app-like navigation experiences.
+      </p>
+      
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">✨</div>
+          <h3 class="feature-title">Shared Element Morphing</h3>
+          <p class="feature-text">
+            Elements with matching <code>transition:name</code> smoothly morph between pages,
+            creating visual continuity and helping users understand navigation context.
+          </p>
+          <code class="feature-code">&lt;div transition:name="hero"&gt;</code>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">🔄</div>
+          <h3 class="feature-title">State Persistence</h3>
+          <p class="feature-text">
+            Use <code>transition:persist</code> to maintain component state across navigations.
+            Perfect for media players, forms, or any stateful UI.
+          </p>
+          <code class="feature-code">&lt;video transition:persist&gt;</code>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">🎬</div>
+          <h3 class="feature-title">Custom Animations</h3>
+          <p class="feature-text">
+            Control animation behavior with <code>transition:animate</code> using built-in
+            animations like fade, slide, or create custom animations.
+          </p>
+          <code class="feature-code">transition:animate="fade"</code>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">♿</div>
+          <h3 class="feature-title">Accessibility</h3>
+          <p class="feature-text">
+            Automatically respects <code>prefers-reduced-motion</code> settings,
+            ensuring animations don't cause discomfort for users with motion sensitivity.
+          </p>
+          <code class="feature-code">@media (prefers-reduced-motion)</code>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">⚡</div>
+          <h3 class="feature-title">Client-Side Routing</h3>
+          <p class="feature-text">
+            The <code>&lt;ClientRouter /&gt;</code> component enables SPA-like navigation
+            without full page reloads, improving perceived performance.
+          </p>
+          <code class="feature-code">&lt;ClientRouter /&gt;</code>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">🌐</div>
+          <h3 class="feature-title">Progressive Enhancement</h3>
+          <p class="feature-text">
+            Falls back gracefully to standard navigation in browsers that don't support
+            the View Transitions API, ensuring universal compatibility.
+          </p>
+          <code class="feature-code">fallback="animate"</code>
+        </div>
+      </div>
+    </section>
+
+    <!-- Code Examples -->
+    <section class="demo-section">
+      <h2 class="section-title">Implementation Examples</h2>
+      <p class="section-description">
+        Here's how to implement View Transitions in your Astro project.
+      </p>
+      
+      <div class="code-examples">
+        <div class="code-example">
+          <h3 class="example-title">1. Enable View Transitions</h3>
+          <pre class="code-block"><code>{'---'}
+import {'{'}ClientRouter{'}'} from 'astro:transitions';
+{'---'}
+
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;ClientRouter /&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;!-- Your content --&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+        </div>
+        
+        <div class="code-example">
+          <h3 class="example-title">2. Shared Element Transition</h3>
+          <pre class="code-block"><code>&lt;!-- Page A --&gt;
+&lt;div transition:name="hero"&gt;
+  &lt;h1&gt;Welcome&lt;/h1&gt;
+&lt;/div&gt;
+
+&lt;!-- Page B --&gt;
+&lt;div transition:name="hero"&gt;
+  &lt;h1&gt;About Us&lt;/h1&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+        
+        <div class="code-example">
+          <h3 class="example-title">3. Persistent Element</h3>
+          <pre class="code-block"><code>&lt;video 
+  controls 
+  transition:persist="player"
+&gt;
+  &lt;source src="/video.mp4" /&gt;
+&lt;/video&gt;
+
+&lt;!-- State persists across pages --&gt;</code></pre>
+        </div>
+        
+        <div class="code-example">
+          <h3 class="example-title">4. Custom Animation</h3>
+          <pre class="code-block"><code>{'---'}
+import {'{'}fade, slide{'}'} from 'astro:transitions';
+{'---'}
+
+&lt;div transition:animate="fade"&gt;
+  Fades in/out
+&lt;/div&gt;
+
+&lt;div transition:animate={'{'}slide({'{'}duration: '0.4s'{'}'}){'}'}&gt;
+  Slides with custom duration
+&lt;/div&gt;</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- Navigation Test -->
+    <section class="demo-section">
+      <h2 class="section-title">Try It Yourself</h2>
+      <p class="section-description">
+        Navigate between pages using the links below and observe the smooth transitions.
+        Pay attention to how elements morph and how the persistent video continues playing.
+      </p>
+      
+      <div class="nav-test-grid">
+        <a href="/" class="nav-test-link">
+          <span class="link-icon">🏠</span>
+          <span class="link-text">Home</span>
+        </a>
+        <a href="/buttons" class="nav-test-link">
+          <span class="link-icon">🔘</span>
+          <span class="link-text">Buttons</span>
+        </a>
+        <a href="/popups" class="nav-test-link">
+          <span class="link-icon">💬</span>
+          <span class="link-text">Popups</span>
+        </a>
+        <a href="/theme" class="nav-test-link">
+          <span class="link-icon">🎨</span>
+          <span class="link-text">Theme</span>
+        </a>
+        <a href="/integrations" class="nav-test-link">
+          <span class="link-icon">🔗</span>
+          <span class="link-text">Integrations</span>
+        </a>
+      </div>
+    </section>
+
+    <footer class="page-footer">
+      <a href="/" class="back-link">
+        ← Back to Home
+      </a>
+    </footer>
+  </div>
+</Layout>
+
+<style>
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+    min-height: 100vh;
+  }
+
+  /* Page Header */
+  .page-header {
+    margin-bottom: 3rem;
+    text-align: center;
+  }
+
+  .page-title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 1rem;
+  }
+
+  .page-description {
+    font-size: 1.125rem;
+    color: #9ca3af;
+    line-height: 1.6;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  /* Demo Sections */
+  .demo-section {
+    margin-bottom: 4rem;
+  }
+
+  .section-title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--color-text-primary, #ffffff);
+    margin-bottom: 0.75rem;
+  }
+
+  .section-description {
+    font-size: 1rem;
+    color: #9ca3af;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+  }
+
+  .section-description code {
+    background: rgba(99, 102, 241, 0.1);
+    color: #a78bfa;
+    padding: 0.125rem 0.375rem;
+    border-radius: 4px;
+    font-size: 0.875rem;
+    font-family: 'Courier New', monospace;
+  }
+
+  /* Transition Grid */
+  .transition-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .transition-card {
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .transition-card:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(99, 102, 241, 0.5);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 32px rgba(99, 102, 241, 0.2);
+  }
+
+  .card-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+
+  .card-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--color-text-primary, #ffffff);
+    margin-bottom: 0.5rem;
+  }
+
+  .card-text {
+    font-size: 0.875rem;
+    color: #9ca3af;
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  /* Persistent Elements Demo */
+  .persist-demo {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    align-items: start;
+  }
+
+  .video-container {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 1.5rem;
+  }
+
+  .demo-video {
+    width: 100%;
+    border-radius: 12px;
+    margin-bottom: 1rem;
+  }
+
+  .video-caption {
+    font-size: 0.875rem;
+    color: #9ca3af;
+    text-align: center;
+    margin: 0;
+  }
+
+  .video-caption code {
+    background: rgba(99, 102, 241, 0.1);
+    color: #a78bfa;
+    padding: 0.125rem 0.375rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+  }
+
+  .persist-info {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 2rem;
+  }
+
+  .info-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--color-text-primary, #ffffff);
+    margin-bottom: 1rem;
+  }
+
+  .info-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .info-list li {
+    padding: 0.75rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    color: #9ca3af;
+    line-height: 1.6;
+  }
+
+  .info-list li:last-child {
+    border-bottom: none;
+  }
+
+  .info-list strong {
+    color: var(--color-text-primary, #ffffff);
+    font-weight: 600;
+  }
+
+  /* Features Grid */
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .feature-card {
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    transition: all 0.3s ease;
+  }
+
+  .feature-card:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(99, 102, 241, 0.3);
+    transform: translateY(-2px);
+  }
+
+  .feature-icon {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .feature-title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--color-text-primary, #ffffff);
+    margin-bottom: 0.75rem;
+  }
+
+  .feature-text {
+    font-size: 0.875rem;
+    color: #9ca3af;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+
+  .feature-code {
+    display: block;
+    background: rgba(0, 0, 0, 0.3);
+    color: #a78bfa;
+    padding: 0.5rem 0.75rem;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-family: 'Courier New', monospace;
+    overflow-x: auto;
+  }
+
+  /* Code Examples */
+  .code-examples {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .code-example {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 1.5rem;
+  }
+
+  .example-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-text-primary, #ffffff);
+    margin-bottom: 1rem;
+  }
+
+  .code-block {
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 8px;
+    padding: 1rem;
+    overflow-x: auto;
+    margin: 0;
+  }
+
+  .code-block code {
+    font-family: 'Courier New', monospace;
+    font-size: 0.8rem;
+    line-height: 1.6;
+    color: #e5e7eb;
+  }
+
+  /* Navigation Test */
+  .nav-test-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+  }
+
+  .nav-test-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1.5rem;
+    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+    border-radius: 12px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+
+  .nav-test-link:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 32px rgba(99, 102, 241, 0.4);
+  }
+
+  .link-icon {
+    font-size: 2rem;
+  }
+
+  .link-text {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #ffffff;
+  }
+
+  /* Footer */
+  .page-footer {
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: center;
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #6366f1;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.2s;
+  }
+
+  .back-link:hover {
+    color: #8b5cf6;
+    transform: translateX(-4px);
+  }
+
+  /* Responsive Design */
+  @media (max-width: 1024px) {
+    .persist-demo {
+      grid-template-columns: 1fr;
+    }
+
+    .code-examples {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .container {
+      padding: 1rem 0.75rem;
+    }
+
+    .page-title {
+      font-size: 2rem;
+    }
+
+    .page-description {
+      font-size: 1rem;
+    }
+
+    .transition-grid,
+    .features-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .nav-test-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .demo-section {
+      margin-bottom: 3rem;
+    }
+
+    .section-title {
+      font-size: 1.5rem;
+    }
+
+    .nav-test-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* Reduced Motion Support */
+  @media (prefers-reduced-motion: reduce) {
+    .transition-card,
+    .feature-card,
+    .nav-test-link,
+    .back-link {
+      transition: none;
+    }
+
+    .transition-card:hover,
+    .feature-card:hover,
+    .nav-test-link:hover {
+      transform: none;
+    }
+  }
+</style>

@@ -1,0 +1,92 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ButtonDemo from '../components/islands/ButtonDemo.svelte';
+---
+
+<Layout title="Buttons - TMA Studio">
+  <div class="container">
+    <header class="page-header">
+      <h1 class="page-title">Telegram Buttons</h1>
+      <p class="page-description">
+        Explore MainButton and BackButton - native Telegram UI elements controlled by the WebApp API.
+        These buttons appear in the Telegram interface, not in your web content.
+      </p>
+    </header>
+
+    <ButtonDemo client:load />
+
+    <footer class="page-footer">
+      <a href="/" class="back-link">
+        ← Back to Home
+      </a>
+    </footer>
+  </div>
+</Layout>
+
+<style>
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+    min-height: 100vh;
+  }
+
+  .page-header {
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+
+  .page-title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 1rem;
+  }
+
+  .page-description {
+    font-size: 1.125rem;
+    color: #9ca3af;
+    line-height: 1.6;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .page-footer {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: center;
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #6366f1;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.2s;
+  }
+
+  .back-link:hover {
+    color: #8b5cf6;
+    transform: translateX(-4px);
+  }
+
+  @media (max-width: 640px) {
+    .container {
+      padding: 1rem 0.75rem;
+    }
+
+    .page-title {
+      font-size: 2rem;
+    }
+
+    .page-description {
+      font-size: 1rem;
+    }
+  }
+</style>

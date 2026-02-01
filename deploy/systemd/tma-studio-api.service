@@ -1,0 +1,33 @@
+# TMA Studio FastAPI Backend Service
+# Copy to: /etc/systemd/system/tma-studio-api.service
+
+[Unit]
+Description=TMA Studio FastAPI Backend
+After=network.target postgresql.service
+
+[Service]
+Type=simple
+User=www-data
+Group=www-data
+WorkingDirectory=/opt/tma-studio/apps/api
+Environment="PATH=/opt/tma-studio/venv/bin"
+EnvironmentFile=/opt/tma-studio/apps/api/.env
+
+# --proxy-headers: Trust X-Forwarded-* headers from Nginx
+# Required for: secure cookies (https scheme), CORS origin validation
+ExecStart=/opt/tma-studio/venv/bin/uvicorn app.main:app \
+    --host 127.0.0.1 \
+    --port 8000 \
+    --workers 4 \
+    --proxy-headers
+
+# Restart policy
+Restart=always
+RestartSec=10
+
+# Logging
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

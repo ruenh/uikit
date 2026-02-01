@@ -1,0 +1,11 @@
+# TMA Studio - Bot Dependencies
+
+# Telegram Bot Framework
+# Source: aiogram official documentation (https://docs.aiogram.dev/)
+# Verified: aiogram 3.24.0 is the latest stable version with WebAppInfo support
+aiogram==3.24.0
+
+# Environment variable management
+# Used for loading BOT_TOKEN and WEB_APP_URL from .env file
+# Version matches API requirements for consistency
+python-dotenv==1.0.1

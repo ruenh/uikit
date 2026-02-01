@@ -1,0 +1,25 @@
+# FastAPI framework
+# Source: FastAPI documentation (verified via MCP)
+# Version: Latest stable for production use
+fastapi==0.115.0
+
+# ASGI server for production
+# Source: FastAPI deployment documentation
+uvicorn[standard]==0.32.0
+
+# PostgreSQL async driver
+# Source: asyncpg documentation (verified via MCP)
+# Provides connection pooling with create_pool()
+asyncpg==0.29.0
+
+# JWT token handling
+# Source: python-jose documentation (verified via MCP)
+# [cryptography] extra provides cryptographic backend
+python-jose[cryptography]==3.3.0
+
+# Settings management from environment variables
+# Source: pydantic-settings documentation (verified via MCP)
+pydantic-settings==2.6.1
+
+# Python dotenv for loading .env files
+python-dotenv==1.0.1
