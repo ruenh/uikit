@@ -444,20 +444,35 @@ export function applyThemeToCSS(): void {
   }
 }
 
+// Store theme change handlers to enable proper cleanup
+const themeHandlers = new WeakMap<() => void, () => void>();
+
 /**
  * Listen for theme changes
  * Automatically applies new theme to CSS when theme changes
+ * Returns cleanup function to remove the listener
  */
-export function onThemeChanged(callback: () => void): void {
+export function onThemeChanged(callback: () => void): () => void {
   const tg = getTelegramWebApp();
   if (tg) {
     const handler = () => {
       applyThemeToCSS();
       callback();
     };
+    themeHandlers.set(callback, handler);
     tg.onEvent('themeChanged', handler);
+    
+    // Return cleanup function
+    return () => {
+      const storedHandler = themeHandlers.get(callback);
+      if (storedHandler) {
+        tg.offEvent('themeChanged', storedHandler);
+        themeHandlers.delete(callback);
+      }
+    };
   } else {
     warnUnavailable('onThemeChanged');
+    return () => {}; // No-op cleanup
   }
 }
 
@@ -467,7 +482,11 @@ export function onThemeChanged(callback: () => void): void {
 export function offThemeChanged(callback: () => void): void {
   const tg = getTelegramWebApp();
   if (tg) {
-    tg.offEvent('themeChanged', callback);
+    const handler = themeHandlers.get(callback);
+    if (handler) {
+      tg.offEvent('themeChanged', handler);
+      themeHandlers.delete(callback);
+    }
   } else {
     warnUnavailable('offThemeChanged');
   }
