@@ -1,208 +1,132 @@
 <script lang="ts">
-  import { onMount, onDestroy } from 'svelte';
-  import * as tg from '../../lib/tg';
+  import { onMount, onDestroy } from "svelte";
+  import * as tg from "../../lib/tg";
 
-  // State for MainButton
-  let mainButtonText = $state('Click Me!');
+  let mainButtonText = $state("Click Me!");
   let mainButtonVisible = $state(false);
-  let mainButtonColor = $state('#6366f1');
-  let mainButtonTextColor = $state('#ffffff');
+  let mainButtonColor = $state("#6366f1");
+  let mainButtonTextColor = $state("#ffffff");
   let mainButtonClickCount = $state(0);
 
-  // State for BackButton
   let backButtonVisible = $state(false);
   let backButtonClickCount = $state(0);
 
-  // Handlers
   let mainButtonHandler: (() => void) | null = null;
   let backButtonHandler: (() => void) | null = null;
 
   onMount(() => {
-    // Initialize handlers
-    mainButtonHandler = () => {
-      mainButtonClickCount++;
-      tg.hapticImpact('medium');
-    };
-
-    backButtonHandler = () => {
-      backButtonClickCount++;
-      tg.hapticImpact('light');
-    };
-
-    // Register handlers
+    mainButtonHandler = () => { mainButtonClickCount++; tg.hapticImpact("medium"); };
+    backButtonHandler = () => { backButtonClickCount++; tg.hapticImpact("light"); };
     tg.onMainButtonClick(mainButtonHandler);
     tg.onBackButtonClick(backButtonHandler);
   });
 
   onDestroy(() => {
-    // Clean up handlers
-    if (mainButtonHandler) {
-      tg.offMainButtonClick(mainButtonHandler);
-    }
-    if (backButtonHandler) {
-      tg.offBackButtonClick(backButtonHandler);
-    }
-
-    // Hide buttons on unmount
+    if (mainButtonHandler) tg.offMainButtonClick(mainButtonHandler);
+    if (backButtonHandler) tg.offBackButtonClick(backButtonHandler);
     tg.hideMainButton();
     tg.hideBackButton();
   });
 
-  // MainButton actions
   function toggleMainButton() {
-    if (mainButtonVisible) {
-      tg.hideMainButton();
-      mainButtonVisible = false;
-    } else {
-      tg.setMainButtonParams({
-        text: mainButtonText,
-        color: mainButtonColor,
-        text_color: mainButtonTextColor,
-        is_active: true,
-        is_visible: true,
-      });
-      tg.showMainButton();
-      mainButtonVisible = true;
-    }
+    if (mainButtonVisible) { tg.hideMainButton(); mainButtonVisible = false; return; }
+    tg.setMainButtonParams({ text: mainButtonText, color: mainButtonColor, text_color: mainButtonTextColor, is_active: true, is_visible: true });
+    tg.showMainButton();
+    mainButtonVisible = true;
   }
 
   function updateMainButtonText() {
     tg.setMainButtonText(mainButtonText);
-    tg.setMainButtonParams({
-      text: mainButtonText,
-    });
+    tg.setMainButtonParams({ text: mainButtonText });
   }
 
   function updateMainButtonColor() {
-    tg.setMainButtonParams({
-      color: mainButtonColor,
-      text_color: mainButtonTextColor,
-    });
+    tg.setMainButtonParams({ color: mainButtonColor, text_color: mainButtonTextColor });
   }
 
-  // BackButton actions
   function toggleBackButton() {
-    if (backButtonVisible) {
-      tg.hideBackButton();
-      backButtonVisible = false;
-    } else {
-      tg.showBackButton();
-      backButtonVisible = true;
-    }
+    if (backButtonVisible) { tg.hideBackButton(); backButtonVisible = false; return; }
+    tg.showBackButton();
+    backButtonVisible = true;
   }
 
-  function resetCounters() {
-    mainButtonClickCount = 0;
-    backButtonClickCount = 0;
-  }
+  function resetCounters() { mainButtonClickCount = 0; backButtonClickCount = 0; }
 </script>
 
-<div class="space-y-8">
-  <!-- MainButton Demo -->
-  <section class="demo-card">
-    <h2 class="text-2xl font-bold mb-4 text-white">MainButton</h2>
-    <p class="text-gray-300 mb-6">
+<div class="space-y-6">
+  <!-- MainButton card -->
+  <section class="glass rounded-2xl p-5 sm:p-6 shadow-[var(--shadow-md)]">
+    <h2 class="text-xl font-semibold">MainButton</h2>
+    <p class="mt-2 text-sm leading-relaxed text-[var(--color-text-secondary)]">
       The MainButton is a prominent button at the bottom of the Mini App. It's controlled by the WebApp API and appears in the Telegram interface.
     </p>
 
-    <div class="space-y-4">
-      <!-- Toggle MainButton -->
-      <div>
-        <button
-          onclick={toggleMainButton}
-          class="btn-primary"
-        >
-          {mainButtonVisible ? 'Hide' : 'Show'} MainButton
-        </button>
-        <p class="text-sm text-gray-400 mt-2">
-          Status: <span class="font-semibold">{mainButtonVisible ? 'Visible' : 'Hidden'}</span>
-        </p>
-      </div>
+    <div class="mt-4 flex flex-col sm:flex-row gap-3 sm:items-center">
+      <button class="w-full sm:w-auto rounded-xl px-4 py-3 font-semibold text-white bg-[var(--gradient-primary)] shadow-[var(--shadow-glow)] active:translate-y-[1px] transition"
+        on:click={toggleMainButton}>
+        {mainButtonVisible ? "Hide" : "Show"} MainButton
+      </button>
 
-      <!-- Text Input -->
+      <div class="text-sm text-[var(--color-text-secondary)]">
+        Status: <span class="text-white">{mainButtonVisible ? "Visible" : "Hidden"}</span>
+      </div>
+    </div>
+
+    <div class="mt-5 grid gap-4">
       <div>
-        <label class="block text-sm font-medium text-gray-300 mb-2">
-          Button Text
-        </label>
-        <div class="flex gap-2">
+        <div class="text-sm font-semibold">Button Text</div>
+        <div class="mt-2 flex flex-col sm:flex-row gap-3">
           <input
+            class="w-full rounded-xl border border-white/10 bg-black/30 px-3 py-3 text-sm outline-none focus:border-[var(--color-accent-primary)]"
             type="text"
             bind:value={mainButtonText}
-            class="input-field flex-1"
-            placeholder="Enter button text"
-          />
-          <button
-            onclick={updateMainButtonText}
-            class="btn-secondary"
-            disabled={!mainButtonVisible}
-          >
-            Update Text
+            placeholder="Enter button text" />
+          <button class="w-full sm:w-auto rounded-xl px-4 py-3 font-semibold bg-white/10 border border-white/10 hover:bg-white/15 disabled:opacity-50 transition"
+            on:click={updateMainButtonText}
+            disabled={!mainButtonVisible}>
+            Update text
           </button>
         </div>
       </div>
 
-      <!-- Color Inputs -->
-      <div class="grid grid-cols-2 gap-4">
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
-          <label class="block text-sm font-medium text-gray-300 mb-2">
-            Button Color
-          </label>
-          <div class="flex gap-2">
-            <input
-              type="color"
-              bind:value={mainButtonColor}
-              class="color-input"
-            />
-            <input
-              type="text"
-              bind:value={mainButtonColor}
-              class="input-field flex-1"
-              placeholder="#6366f1"
-            />
+          <div class="text-sm font-semibold">Button Color</div>
+          <div class="mt-2 flex items-center gap-3">
+            <input class="h-11 w-12 rounded-xl border border-white/10 bg-transparent" type="color" bind:value={mainButtonColor} />
+            <input class="w-full rounded-xl border border-white/10 bg-black/30 px-3 py-3 text-sm outline-none focus:border-[var(--color-accent-primary)]"
+              type="text" bind:value={mainButtonColor} />
           </div>
         </div>
+
         <div>
-          <label class="block text-sm font-medium text-gray-300 mb-2">
-            Text Color
-          </label>
-          <div class="flex gap-2">
-            <input
-              type="color"
-              bind:value={mainButtonTextColor}
-              class="color-input"
-            />
-            <input
-              type="text"
-              bind:value={mainButtonTextColor}
-              class="input-field flex-1"
-              placeholder="#ffffff"
-            />
+          <div class="text-sm font-semibold">Text Color</div>
+          <div class="mt-2 flex items-center gap-3">
+            <input class="h-11 w-12 rounded-xl border border-white/10 bg-transparent" type="color" bind:value={mainButtonTextColor} />
+            <input class="w-full rounded-xl border border-white/10 bg-black/30 px-3 py-3 text-sm outline-none focus:border-[var(--color-accent-primary)]"
+              type="text" bind:value={mainButtonTextColor} />
           </div>
         </div>
       </div>
 
-      <button
-        onclick={updateMainButtonColor}
-        class="btn-secondary"
-        disabled={!mainButtonVisible}
-      >
-        Update Colors
+      <button class="w-full rounded-xl px-4 py-3 font-semibold bg-white/10 border border-white/10 hover:bg-white/15 disabled:opacity-50 transition"
+        on:click={updateMainButtonColor}
+        disabled={!mainButtonVisible}>
+        Update colors
       </button>
 
-      <!-- Click Counter -->
-      <div class="stats-card">
-        <p class="text-sm text-gray-400">MainButton Clicks:</p>
-        <p class="text-3xl font-bold text-white">{mainButtonClickCount}</p>
+      <div class="rounded-xl border border-[rgba(99,102,241,.25)] bg-[rgba(99,102,241,.10)] p-4 text-center">
+        <div class="text-sm text-[var(--color-text-secondary)]">MainButton Clicks</div>
+        <div class="mt-1 text-3xl font-extrabold">{mainButtonClickCount}</div>
       </div>
 
-      <!-- Code Snippet -->
-      <details class="code-snippet">
-        <summary class="cursor-pointer text-sm font-medium text-gray-300 mb-2">
-          Show Code
+      <details class="rounded-xl border border-white/10 bg-black/20">
+        <summary class="cursor-pointer select-none px-4 py-3 text-sm font-semibold">
+          Show code
         </summary>
-        <pre class="text-xs overflow-x-auto"><code>{`import * as tg from './lib/tg';
+        <pre class="overflow-x-auto px-4 pb-4 text-xs leading-relaxed text-white/90"><code>{`import * as tg from './lib/tg';
 
-// Show MainButton with custom text and colors
+// Show MainButton
 tg.setMainButtonParams({
   text: '${mainButtonText}',
   color: '${mainButtonColor}',
@@ -227,39 +151,34 @@ tg.hideMainButton();`}</code></pre>
     </div>
   </section>
 
-  <!-- BackButton Demo -->
-  <section class="demo-card">
-    <h2 class="text-2xl font-bold mb-4 text-white">BackButton</h2>
-    <p class="text-gray-300 mb-6">
-      The BackButton appears in the Mini App header and provides navigation functionality. It's commonly used for going back to previous screens.
+  <!-- BackButton card -->
+  <section class="glass rounded-2xl p-5 sm:p-6 shadow-[var(--shadow-md)]">
+    <h2 class="text-xl font-semibold">BackButton</h2>
+    <p class="mt-2 text-sm leading-relaxed text-[var(--color-text-secondary)]">
+      The BackButton appears in the Mini App header and provides navigation functionality.
     </p>
 
-    <div class="space-y-4">
-      <!-- Toggle BackButton -->
-      <div>
-        <button
-          onclick={toggleBackButton}
-          class="btn-primary"
-        >
-          {backButtonVisible ? 'Hide' : 'Show'} BackButton
-        </button>
-        <p class="text-sm text-gray-400 mt-2">
-          Status: <span class="font-semibold">{backButtonVisible ? 'Visible' : 'Hidden'}</span>
-        </p>
-      </div>
+    <div class="mt-4 flex flex-col sm:flex-row gap-3 sm:items-center">
+      <button class="w-full sm:w-auto rounded-xl px-4 py-3 font-semibold bg-white/10 border border-white/10 hover:bg-white/15 transition"
+        on:click={toggleBackButton}>
+        {backButtonVisible ? "Hide" : "Show"} BackButton
+      </button>
 
-      <!-- Click Counter -->
-      <div class="stats-card">
-        <p class="text-sm text-gray-400">BackButton Clicks:</p>
-        <p class="text-3xl font-bold text-white">{backButtonClickCount}</p>
+      <div class="text-sm text-[var(--color-text-secondary)]">
+        Status: <span class="text-white">{backButtonVisible ? "Visible" : "Hidden"}</span>
       </div>
+    </div>
 
-      <!-- Code Snippet -->
-      <details class="code-snippet">
-        <summary class="cursor-pointer text-sm font-medium text-gray-300 mb-2">
-          Show Code
-        </summary>
-        <pre class="text-xs overflow-x-auto"><code>{`import * as tg from './lib/tg';
+    <div class="mt-4 rounded-xl border border-white/10 bg-black/20 p-4 text-center">
+      <div class="text-sm text-[var(--color-text-secondary)]">BackButton Clicks</div>
+      <div class="mt-1 text-3xl font-extrabold">{backButtonClickCount}</div>
+    </div>
+
+    <details class="mt-4 rounded-xl border border-white/10 bg-black/20">
+      <summary class="cursor-pointer select-none px-4 py-3 text-sm font-semibold">
+        Show code
+      </summary>
+      <pre class="overflow-x-auto px-4 pb-4 text-xs leading-relaxed text-white/90"><code>{`import * as tg from './lib/tg';
 
 // Show BackButton
 tg.showBackButton();
@@ -268,128 +187,18 @@ tg.showBackButton();
 tg.onBackButtonClick(() => {
   console.log('BackButton clicked!');
   tg.hapticImpact('light');
-  // Navigate back or perform action
 });
 
 // Hide button
 tg.hideBackButton();`}</code></pre>
-      </details>
-    </div>
+    </details>
   </section>
 
   <!-- Reset Button -->
   <div class="text-center">
-    <button
-      onclick={resetCounters}
-      class="btn-secondary"
-    >
-      Reset Counters
+    <button class="w-full sm:w-auto rounded-xl px-6 py-3 font-semibold bg-white/10 border border-white/10 hover:bg-white/15 transition"
+      on:click={resetCounters}>
+      Reset counters
     </button>
   </div>
 </div>
-
-<style>
-  .demo-card {
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 16px;
-    padding: 1.5rem;
-  }
-
-  .stats-card {
-    background: rgba(99, 102, 241, 0.1);
-    border: 1px solid rgba(99, 102, 241, 0.3);
-    border-radius: 12px;
-    padding: 1rem;
-    text-align: center;
-  }
-
-  .code-snippet {
-    background: rgba(0, 0, 0, 0.3);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 8px;
-    padding: 1rem;
-    margin-top: 1rem;
-  }
-
-  .code-snippet pre {
-    margin-top: 0.5rem;
-    color: #e5e7eb;
-    font-family: 'Courier New', monospace;
-  }
-
-  .btn-primary {
-    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
-    color: white;
-    padding: 0.75rem 1.5rem;
-    border-radius: 12px;
-    font-weight: 600;
-    border: none;
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-
-  .btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(99, 102, 241, 0.4);
-  }
-
-  .btn-primary:active {
-    transform: translateY(0);
-  }
-
-  .btn-secondary {
-    background: rgba(255, 255, 255, 0.1);
-    color: white;
-    padding: 0.75rem 1.5rem;
-    border-radius: 12px;
-    font-weight: 600;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-
-  .btn-secondary:hover:not(:disabled) {
-    background: rgba(255, 255, 255, 0.15);
-    border-color: rgba(255, 255, 255, 0.3);
-  }
-
-  .btn-secondary:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-  }
-
-  .input-field {
-    background: rgba(0, 0, 0, 0.3);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 8px;
-    padding: 0.5rem 0.75rem;
-    color: white;
-    font-size: 0.875rem;
-  }
-
-  .input-field:focus {
-    outline: none;
-    border-color: #6366f1;
-    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
-  }
-
-  .color-input {
-    width: 48px;
-    height: 40px;
-    border-radius: 8px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    cursor: pointer;
-    background: transparent;
-  }
-
-  .color-input::-webkit-color-swatch-wrapper {
-    padding: 2px;
-  }
-
-  .color-input::-webkit-color-swatch {
-    border: none;
-    border-radius: 6px;
-  }
-</style>
